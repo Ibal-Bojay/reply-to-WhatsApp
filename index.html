@@ -16,6 +16,11 @@
         }
         h1 {
             color: #25D366;
+            margin-bottom: 10px;
+        }
+        .logo {
+            width: 80px;
+            margin-bottom: 20px;
         }
         form {
             background: white;
@@ -27,6 +32,7 @@
         }
         label {
             font-weight: bold;
+            margin-top: 10px;
         }
         input[type="text"],
         textarea {
@@ -35,6 +41,12 @@
             margin: 8px 0;
             border: 1px solid #ced4da;
             border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #25D366;
+            outline: none;
         }
         input[type="submit"] {
             background-color: #25D366;
@@ -44,6 +56,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
         }
         input[type="submit"]:hover {
             background-color: #1DAE56;
@@ -55,6 +68,7 @@
     </style>
 </head>
 <body>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo" class="logo">
     <h1>Kirim Pesan WhatsApp</h1>
     <p id="greeting"></p>
     <form id="whatsapp-form">
@@ -86,7 +100,7 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
         const today = now.toLocaleDateString('id-ID', options);
         
-        const greetingMessage = `Hallo Ibal Bojay, Selamat ${greetingTime}! Hari ini adalah ${today}. Silahkan masukkan pesan anda.`;
+        const greetingMessage = `Hallo Ibal Bojay, Selamat ${greetingTime}! Semoga harimu menyenangkan dan produktif. Hari ini adalah ${today}. Silahkan masukkan pesan anda dengan semangat!`;
         document.getElementById('greeting').innerText = greetingMessage;
 
         document.getElementById('whatsapp-form').onsubmit = function(event) {
