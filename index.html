@@ -4,15 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kirim Pesan WhatsApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #25D366;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1DAE56;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>Kirim Pesan WhatsApp</h1>
     <p id="greeting"></p>
     <form id="whatsapp-form">
-        <label for="phone">Nomor Telepon (tanpa +62):</label><br>
-        <input type="text" id="phone" name="phone" required><br><br>
-        <label for="message">Pesan:</label><br>
-        <textarea id="message" name="message" required></textarea><br><br>
+        <label for="phone">Nomor Telepon (tanpa +62):</label>
+        <input type="text" id="phone" name="phone" placeholder="82123456789" required>
+        
+        <label for="message">Pesan:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Masukkan pesan Anda di sini..." required></textarea>
+        
         <input type="submit" value="Kirim Pesan">
     </form>
 
