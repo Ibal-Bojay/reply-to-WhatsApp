@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirim Pesan WhatsApp</title>
+</head>
+<body>
+    <h1>Kirim Pesan WhatsApp</h1>
+    <p id="greeting"></p>
+    <form id="whatsapp-form">
+        <label for="phone">Nomor Telepon (tanpa +62):</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
+        <label for="message">Pesan:</label><br>
+        <textarea id="message" name="message" required></textarea><br><br>
+        <input type="submit" value="Kirim Pesan">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        // Mendapatkan waktu dan membuat pesan sapaan
+        const now = new Date();
+        const hours = now.getHours();
+        let greetingTime;
+
+        if (hours < 12) {
+            greetingTime = "pagi";
+        } else if (hours < 18) {
+            greetingTime = "siang";
+        } else {
+            greetingTime = "malam";
+        }
+
+        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        const today = now.toLocaleDateString('id-ID', options);
+        
+        const greetingMessage = `Hallo Ibal Bojay, Selamat ${greetingTime}! Hari ini adalah ${today}. Silahkan masukkan pesan anda.`;
+        document.getElementById('greeting').innerText = greetingMessage;
+
+        document.getElementById('whatsapp-form').onsubmit = function(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+            const phone = document.getElementById('phone').value;
+            const message = encodeURIComponent(document.getElementById('message').value);
+            const url = `https://wa.me/62${phone}?text=${message}`;
+            document.getElementById('result').innerHTML = `<h2>Pesan berhasil dibuat!</h2>
+            <p><a href='${url}' target='_blank'>Kirim Pesan ke WhatsApp</a></p>`;
+        };
+    </script>
+</body>
+</html>
