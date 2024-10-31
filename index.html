@@ -17,6 +17,7 @@
         h1 {
             color: #25D366;
             margin-bottom: 10px;
+            text-align: center;
         }
         .logo {
             width: 80px;
@@ -27,7 +28,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 400px;
             margin-top: 20px;
         }
         label {
@@ -35,7 +37,8 @@
             margin-top: 10px;
         }
         select,
-        textarea {
+        textarea,
+        input[type="text"] {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -44,7 +47,8 @@
             transition: border-color 0.3s;
         }
         select:focus,
-        textarea:focus {
+        textarea:focus,
+        input[type="text"]:focus {
             border-color: #25D366;
             outline: none;
         }
@@ -65,6 +69,18 @@
             margin-top: 20px;
             text-align: center;
         }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            form {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,20 +88,34 @@
     <h1>Kirim Pesan WhatsApp</h1>
     <p id="greeting"></p>
     <form id="whatsapp-form">
-        <label for="phone">Pilih Nomor Telepon:</label>
-        <select id="phone" name="phone" required>
+        <label for="family-phone">Pilih Nomor Telepon Keluarga:</label>
+        <select id="family-phone" name="family-phone" required>
             <option value="82331404778">AMI KU</option>
             <option value="82332009813">ABI KU</option>
             <option value="81232741691">Ca' Muiz</option>
             <option value="83192585404">Ca' Zain</option>
             <option value="85335903443">Ca' Zali</option>
             <option value="81333267842">Ca' Zali 2</option>
-            <option value="82138614807">Ibal</option>
         </select>
-        
-        <label for="message">Pesan:</label>
-        <textarea id="message" name="message" rows="4" placeholder="Masukkan pesan Anda di sini..." required></textarea>
-        
+
+        <label for="personal-phone">Pilih Nomor Telepon Pribadi:</label>
+        <select id="personal-phone" name="personal-phone" required>
+            <option value="82138614807">Hambali Fitrianto</option>
+            <option value="88217194886">Farah Amalia Rahma</option>
+        </select>
+
+        <label for="template-message">Pilih Template Pesan:</label>
+        <select id="template-message" name="template-message">
+            <option value="">-- Pilih Template --</option>
+            <option value="Tolong buatkan template chat, kamu lagi apa?">Tolong buatkan template chat, kamu lagi apa?</option>
+            <option value="Apa kabar? Semoga harimu menyenangkan!">Apa kabar? Semoga harimu menyenangkan!</option>
+            <option value="Sedang apa sekarang?">Sedang apa sekarang?</option>
+            <option value="Ada yang ingin kamu bicarakan?">Ada yang ingin kamu bicarakan?</option>
+        </select>
+
+        <label for="custom-message">Atau masukkan pesan Anda:</label>
+        <input type="text" id="custom-message" name="custom-message" placeholder="Masukkan pesan Anda di sini...">
+
         <input type="submit" value="Kirim Pesan">
     </form>
 
@@ -113,9 +143,25 @@
 
         document.getElementById('whatsapp-form').onsubmit = function(event) {
             event.preventDefault(); // Mencegah pengiriman form default
-            const phone = document.getElementById('phone').value;
-            const message = encodeURIComponent(document.getElementById('message').value);
-            const url = `https://wa.me/62${phone}?text=${message}`;
+            const familyPhone = document.getElementById('family-phone').value;
+            const personalPhone = document.getElementById('personal-phone').value;
+            const selectedPhone = familyPhone || personalPhone;
+            const templateMessage = document.getElementById('template-message').value;
+            const customMessage = document.getElementById('custom-message').value;
+            const message = templateMessage || customMessage; // Pilih pesan dari template atau input
+
+            if (!selectedPhone) {
+                alert("Silakan pilih nomor telepon!");
+                return;
+            }
+
+            if (!message) {
+                alert("Silakan masukkan pesan!");
+                return;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            const url = `https://wa.me/62${selectedPhone}?text=${encodedMessage}`;
             document.getElementById('result').innerHTML = `<h2>Pesan berhasil dibuat!</h2>
             <p><a href='${url}' target='_blank'>Kirim Pesan ke WhatsApp</a></p>`;
         };
