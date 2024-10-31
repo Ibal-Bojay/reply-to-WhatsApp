@@ -34,7 +34,7 @@
             font-weight: bold;
             margin-top: 10px;
         }
-        input[type="text"],
+        select,
         textarea {
             width: 100%;
             padding: 10px;
@@ -43,7 +43,7 @@
             border-radius: 4px;
             transition: border-color 0.3s;
         }
-        input[type="text"]:focus,
+        select:focus,
         textarea:focus {
             border-color: #25D366;
             outline: none;
@@ -72,8 +72,16 @@
     <h1>Kirim Pesan WhatsApp</h1>
     <p id="greeting"></p>
     <form id="whatsapp-form">
-        <label for="phone">Nomor Telepon (tanpa +62):</label>
-        <input type="text" id="phone" name="phone" placeholder="82123456789" required>
+        <label for="phone">Pilih Nomor Telepon:</label>
+        <select id="phone" name="phone" required>
+            <option value="82331404778">AMI KU</option>
+            <option value="82332009813">ABI KU</option>
+            <option value="81232741691">Ca' Muiz</option>
+            <option value="83192585404">Ca' Zain</option>
+            <option value="85335903443">Ca' Zali</option>
+            <option value="81333267842">Ca' Zali 2</option>
+            <option value="82138614807">Ibal</option>
+        </select>
         
         <label for="message">Pesan:</label>
         <textarea id="message" name="message" rows="4" placeholder="Masukkan pesan Anda di sini..." required></textarea>
