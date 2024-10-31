@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kirim Pesan WhatsApp</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,7 +70,7 @@
             margin-top: 20px;
             text-align: center;
         }
-
+        
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -88,29 +89,47 @@
     <h1>Kirim Pesan WhatsApp</h1>
     <p id="greeting"></p>
     <form id="whatsapp-form">
-        <label for="family-phone">Pilih Nomor Telepon Keluarga:</label>
-        <select id="family-phone" name="family-phone" required>
-            <option value="82331404778">AMI KU</option>
-            <option value="82332009813">ABI KU</option>
-            <option value="81232741691">Ca' Muiz</option>
-            <option value="83192585404">Ca' Zain</option>
-            <option value="85335903443">Ca' Zali</option>
-            <option value="81333267842">Ca' Zali 2</option>
-        </select>
-
-        <label for="personal-phone">Pilih Nomor Telepon Pribadi:</label>
-        <select id="personal-phone" name="personal-phone" required>
+        <label for="phone">Pilih Nomor Telepon:</label>
+        <select id="phone" name="phone" required>
+            <option value="">-- Pilih Nomor Telepon --</option>
             <option value="82138614807">Hambali Fitrianto</option>
             <option value="88217194886">Farah Amalia Rahma</option>
         </select>
 
         <label for="template-message">Pilih Template Pesan:</label>
         <select id="template-message" name="template-message">
-            <option value="">-- Pilih Template --</option>
-            <option value="Tolong buatkan template chat, kamu lagi apa?">Tolong buatkan template chat, kamu lagi apa?</option>
-            <option value="Apa kabar? Semoga harimu menyenangkan!">Apa kabar? Semoga harimu menyenangkan!</option>
+            <option value="">-- Pilih Template Pesan --</option>
+            <option value="Sudah sholat?">Sudah sholat?</option>
+            <option value="Sabar">Sabar</option>
+            <option value="Sabar Bro">Sabar Bro</option>
+            <option value="Sabar Bos">Sabar Bos</option>
+            <option value="Selamat Pagi">Selamat Pagi</option>
+            <option value="Selamat Siang">Selamat Siang</option>
+            <option value="Selamat Malam">Selamat Malam</option>
+            <option value="Apa kabar?">Apa kabar?</option>
+            <option value="Sudah mandi?">Sudah mandi?</option>
+            <option value="Sudah makan?">Sudah makan?</option>
+            <option value="Lagi apa?">Lagi apa?</option>
+            <option value="Sibuk apa?">Sibuk apa?</option>
+            <option value="Lagi Sibuk ta?">Lagi Sibuk ta?</option>
             <option value="Sedang apa sekarang?">Sedang apa sekarang?</option>
-            <option value="Ada yang ingin kamu bicarakan?">Ada yang ingin kamu bicarakan?</option>
+            <option value="Mau ngapain hari ini?">Mau ngapain hari ini?</option>
+            <option value="Ada kabar terbaru?">Ada kabar terbaru?</option>
+            <option value="Lagi dimana?">Lagi dimana?</option>
+            <option value="Kapan kita ketemu?">Kapan kita ketemu?</option>
+            <option value="Yuk ngopi bareng">Yuk ngopi bareng</option>
+            <option value="Apa rencanamu besok?">Apa rencanamu besok?</option>
+            <option value="Tanya kabar?">Tanya kabar?</option>
+            <option value="Semoga harimu menyenangkan ya">Semoga harimu menyenangkan ya</option>
+            <option value="Apa yang kamu lakukan sekarang?">Apa yang kamu lakukan sekarang?</option>
+            <option value="Lagi makan apa?">Lagi makan apa?</option>
+            <option value="Selamat beraktivitas!">Selamat beraktivitas!</option>
+            <option value="Semangat ya">Semangat ya</option>
+            <option value="Jangan lupa istirahat ya">Jangan lupa istirahat ya</option>
+            <option value="Ngomong-ngomong, ada berita baru?">Ngomong-ngomong, ada berita baru?</option>
+            <option value="Kapan kita nonton bareng?">Kapan kita nonton bareng?</option>
+            <option value="Mau kemana akhir pekan ini?">Mau kemana akhir pekan ini?</option>
+            <option value="Punya rencana untuk hari ini?">Punya rencana untuk hari ini?</option>
         </select>
 
         <label for="custom-message">Atau masukkan pesan Anda:</label>
@@ -121,7 +140,15 @@
 
     <div id="result"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
+        // Inisialisasi Select2
+        $(document).ready(function() {
+            $('#template-message').select2();
+            $('#phone').select2();
+        });
+
         // Mendapatkan waktu dan membuat pesan sapaan
         const now = new Date();
         const hours = now.getHours();
@@ -143,9 +170,7 @@
 
         document.getElementById('whatsapp-form').onsubmit = function(event) {
             event.preventDefault(); // Mencegah pengiriman form default
-            const familyPhone = document.getElementById('family-phone').value;
-            const personalPhone = document.getElementById('personal-phone').value;
-            const selectedPhone = familyPhone || personalPhone;
+            const selectedPhone = document.getElementById('phone').value;
             const templateMessage = document.getElementById('template-message').value;
             const customMessage = document.getElementById('custom-message').value;
             const message = templateMessage || customMessage; // Pilih pesan dari template atau input
