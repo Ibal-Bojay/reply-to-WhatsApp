@@ -108,7 +108,7 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
         const today = now.toLocaleDateString('id-ID', options);
         
-        const greetingMessage = `Hallo Ibal Bojay, Selamat ${greetingTime}! Semoga harimu menyenangkan dan produktif. Hari ini adalah ${today}. Silahkan masukkan pesan anda dengan semangat!`;
+        const greetingMessage = `Selamat ${greetingTime}!, ${today}. Silahkan masukkan pesan anda!`;
         document.getElementById('greeting').innerText = greetingMessage;
 
         document.getElementById('whatsapp-form').onsubmit = function(event) {
